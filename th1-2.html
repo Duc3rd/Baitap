@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản lý sinh viên</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  input, button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="loginContainer">
+  <h2>Đăng nhập</h2>
+  <input type="text" id="username" placeholder="Tên đăng nhập"><br>
+  <input type="password" id="password" placeholder="Mật khẩu"><br>
+  <button onclick="login()">Đăng nhập</button>
+  <p id="loginError" class="error" style="display: none;">Tài khoản hoặc mật khẩu không chính xác.</p>
+</div>
+
+<div class="container" id="adminContainer" style="display: none;">
+  <h2>Trang quản trị sinh viên</h2>
+  <button onclick="logout()">Đăng xuất</button>
+  <button onclick="showAddStudentForm()">Thêm sinh viên</button>
+  <table id="studentTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Tuổi</th>
+        <th>Địa chỉ</th>
+        <th>SDT</th>
+        <th>Email</th>
+        <th>Lớp học</th>
+      </tr>
+    </thead>
+    <tbody id="studentList"></tbody>
+  </table>
+</div>
+
+<div class="container" id="addStudentForm" style="display: none;">
+  <h2>Thêm sinh viên</h2>
+  <input type="text" id="studentName" placeholder="Tên"><br>
+  <input type="number" id="studentAge" placeholder="Tuổi"><br>
+  <input type="text" id="studentAddress" placeholder="Địa chỉ"><br>
+  <input type="text" id="studentPhone" placeholder="Số điện thoại"><br>
+  <input type="text" id="studentEmail" placeholder="Email"><br>
+  <input type="text" id="studentClass" placeholder="Lớp học"><br>
+  <button onclick="addStudent()">Thêm</button>
+</div>
+
+<script>
+  let loggedIn = false;
+  const students = [];
+
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    if (username === 'admin' && password === 'admin') {
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('adminContainer').style.display = 'block';
+      document.getElementById('studentTable').style.display = 'block';
+      loggedIn = true;
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    loggedIn = false;
+    document.getElementById('loginContainer').style.display = 'block';
+    document.getElementById('adminContainer').style.display = 'none';
+    document.getElementById('studentTable').style.display = 'none';
+    document.getElementById('addStudentForm').style.display = 'none';
+  }
+
+  function showAddStudentForm() {
+    document.getElementById('addStudentForm').style.display = 'block';
+  }
+
+  function addStudent() {
+    const name = document.getElementById('studentName').value;
+    const age = document.getElementById('studentAge').value;
+    const address = document.getElementById('studentAddress').value;
+    const phone = document.getElementById('studentPhone').value;
+    const email = document.getElementById('studentEmail').value;
+    const studentClass = document.getElementById('studentClass').value;
+    const student = { name, age, address, phone, email, class: studentClass };
+    students.push(student);
+    displayStudentList();
+    document.getElementById('addStudentForm').reset();
+    document.getElementById('addStudentForm').style.display = 'none';
+  }
+
+  function displayStudentList() {
+    const studentList = document.getElementById('studentList');
+    studentList.innerHTML = '';
+    students.forEach((student, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${student.name}</td>
+        <td>${student.age}</td>
+        <td>${student.address}</td>
+        <td>${student.phone}</td>
+        <td>${student.email}</td>
+        <td>${student.class}</td>
+      `;
+      studentList.appendChild(row);
+    });
+  }
+</script>
+</body>
+</html>
