@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+.calculator {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+input, button {
+    margin: 5px;
+    padding: 10px;
+}
+button {
+    cursor: pointer;
+}
+#result {
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+    <input type="text" id="inputA" placeholder="Enter number A">
+    <input type="text" id="inputB" placeholder="Enter number B">
+    <button onclick="calculate('SUM')">SUM</button>
+    <button onclick="calculate('SUBTRACT')">SUBTRACT</button>
+    <button onclick="calculate('MULTIPLY')">MULTIPLY</button>
+    <button onclick="calculate('DIVIDE')">DIVIDE</button>
+    <button onclick="reset()">RESET</button>
+    <div id="result"></div>
+</div>
+<script>
+function calculate(operation) {
+    var inputA = parseFloat(document.getElementById('inputA').value);
+    var inputB = parseFloat(document.getElementById('inputB').value);
+    var result;
+    switch(operation) {
+        case 'SUM':
+            result = inputA + inputB;
+            break;
+        case 'SUBTRACT':
+            result = inputA - inputB;
+            break;
+        case 'MULTIPLY':
+            result = inputA * inputB;
+            break;
+        case 'DIVIDE':
+            result = inputB !== 0 ? inputA / inputB : "Cannot divide by zero!";
+            break;
+    }
+    document.getElementById('result').innerText = isNaN(result) ? "Please enter valid numbers!" : "Result: " + result;
+}
+
+function reset() {
+    document.getElementById('inputA').value = "";
+    document.getElementById('inputB').value = "";
+    document.getElementById('result').innerText = "";
+}
+</script>
+</body>
+</html>

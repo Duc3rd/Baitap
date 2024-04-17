@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alarm Clock</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.clock {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#alarm-sound {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div class="clock">00:00</div>
+<div class="controls">
+    <input type="number" id="minutes" min="0" placeholder="Minutes">
+    <input type="number" id="seconds" min="0" max="59" placeholder="Seconds">
+    <button onclick="start()">START</button>
+    <button onclick="reset()">RESET</button>
+</div>
+<audio id="alarm-sound" src="coibaochay.mp3" preload="auto"></audio>
+<script>
+let timer;
+const clockDisplay = document.querySelector('.clock');
+const minutesInput = document.getElementById('minutes');
+const secondsInput = document.getElementById('seconds');
+const alarmSound = document.getElementById('alarm-sound');
+
+function start() {
+    const minutes = parseInt(minutesInput.value) || 0;
+    const seconds = parseInt(secondsInput.value) || 0;
+    const totalSeconds = minutes * 60 + seconds;
+    let remainingSeconds = totalSeconds;
+
+    if (totalSeconds <= 0) {
+        alert("Please enter a valid time.");
+        return;
+    }
+
+    clearInterval(timer);
+    timer = setInterval(() => {
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = remainingSeconds % 60;
+        clockDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+        if (remainingSeconds === 0) {
+            clearInterval(timer);
+            clockDisplay.textContent = '00:00';
+            alarmSound.play();
+        } else {
+            remainingSeconds--;
+        }
+    }, 1000);
+}
+
+function reset() {
+    clearInterval(timer);
+    clockDisplay.textContent = '00:00';
+    minutesInput.value = '';
+    secondsInput.value = '';
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+}
+</script>
+</body>
+</html>
