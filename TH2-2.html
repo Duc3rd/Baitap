@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giới Thiệu Các Loại Biểu Đồ</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+  }
+  h1, h2, p {
+    margin-bottom: 10px;
+  }
+  .chart-container {
+    margin-bottom: 30px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Giới Thiệu Các Loại Biểu Đồ</h1>
+
+<div class="chart-container">
+  <h2>Scatter Plot</h2>
+  <p>Một biểu đồ scatter plot là biểu đồ biểu diễn dữ liệu bằng các điểm được đặt trên một hệ tọa độ. Nó thường được sử dụng để xác định mối quan hệ giữa hai biến.</p>
+  <div id="scatterPlotChart" style="width: 500px; height: 300px;"></div>
+  <p><strong>Các thư viện tham khảo:</strong> Plotly.js</p>
+</div>
+
+<div class="chart-container">
+  <h2>Line Chart</h2>
+  <p>Một biểu đồ line chart là biểu đồ biểu diễn dữ liệu bằng các đường nối các điểm trên một hệ tọa độ. Thường được sử dụng để theo dõi sự thay đổi của một biến qua thời gian.</p>
+  <canvas id="lineChartCanvas" width="500" height="300"></canvas>
+  <p><strong>Các thư viện tham khảo:</strong> Chart.js</p>
+</div>
+
+<div class="chart-container">
+  <h2>Bar Chart</h2>
+  <p>Một biểu đồ bar chart là biểu đồ biểu diễn dữ liệu bằng các cột cố định trên một hệ tọa độ. Thường được sử dụng để so sánh các giá trị của các biến khác nhau.</p>
+  <canvas id="barChartCanvas" width="500" height="300"></canvas>
+  <p><strong>Các thư viện tham khảo:</strong> Chart.js</p>
+</div>
+
+<div class="chart-container">
+  <h2>Pie Chart</h2>
+  <p>Một biểu đồ pie chart là biểu đồ biểu diễn dữ liệu bằng các phần trăm trong một hình tròn. Thường được sử dụng để hiển thị phân phối tương đối của các phần trong một tập dữ liệu.</p>
+  <canvas id="pieChartCanvas" width="500" height="300"></canvas>
+  <p><strong>Các thư viện tham khảo:</strong> Chart.js</p>
+</div>
+
+<div class="chart-container">
+  <h2>Donut Chart</h2>
+  <p>Một biểu đồ donut chart là biểu đồ pie chart có một lỗ ở giữa, tạo ra hình donut. Thường được sử dụng để hiển thị phân phối tương đối của các phần trong một tập dữ liệu nhưng cung cấp một không gian trống ở giữa để hiển thị thông tin bổ sung.</p>
+  <canvas id="donutChartCanvas" width="500" height="300"></canvas>
+  <p><strong>Các thư viện tham khảo:</strong> Chart.js</p>
+</div>
+
+<div class="chart-container">
+  <h2>Bubble Chart</h2>
+  <p>Một biểu đồ bubble chart là biểu đồ biểu diễn dữ liệu bằng các hình tròn với kích thước và vị trí khác nhau trên một hệ tọa độ. Thường được sử dụng để hiển thị sự phân phối của ba biến hoặc để so sánh giữa các nhóm dữ liệu.</p>
+  <svg id="bubbleChartSvg" width="500" height="300"></svg>
+  <p><strong>Các thư viện tham khảo:</strong> D3.js</p>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script>
+// Scatter Plot với Plotly.js
+var scatterPlotData = [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 3, 2, 4, 5],
+  mode: 'markers',
+  type: 'scatter'
+}];
+Plotly.newPlot('scatterPlotChart', scatterPlotData);
+
+// Line Chart với Chart.js
+var lineChartCanvas = document.getElementById('lineChartCanvas').getContext('2d');
+var lineChartData = {
+  labels: ['January', 'February', 'March', 'April', 'May'],
+  datasets: [{
+    label: 'Sales',
+    data: [50, 60, 70, 65, 80],
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)',
+    borderWidth: 1
+  }]
+};
+var lineChart = new Chart(lineChartCanvas, {
+  type: 'line',
+  data: lineChartData
+});
+
+// Bar Chart với Chart.js
+var barChartCanvas = document.getElementById('barChartCanvas').getContext('2d');
+var barChartData = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [{
+    label: 'Votes',
+    data: [12, 19, 3, 5, 2, 3],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 1
+  }]
+};
+var barChart = new Chart(barChartCanvas, {
+  type: 'bar',
+  data: barChartData
+});
+
+// Pie Chart và Donut Chart với Chart.js
+var pieChartCanvas = document.getElementById('pieChartCanvas').getContext('2d');
+var donutChartCanvas = document.getElementById('donutChartCanvas').getContext('2d');
+var pieChartData = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+  datasets: [{
+    label: 'Votes',
+    data: [12, 19, 3, 5, 2],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)'
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)'
+    ],
+    borderWidth: 1
+  }]
+};
+var pieChart = new Chart(pieChartCanvas, {
+  type: 'pie',
+  data: pieChartData
+});
+var donutChart = new Chart(donutChartCanvas, {
+  type: 'doughnut',
+  data: pieChartData
+});
+
+// Bubble Chart với D3.js
+var bubbleChartData = [
+  { "x": 10, "y": 20, "r": 5 },
+  { "x": 30, "y": 40, "r": 10 },
+  { "x": 50, "y": 60, "r": 15 },
+  { "x": 70, "y": 80, "r": 20 },
+  { "x": 90, "y": 100, "r": 25 }
+];
+var bubbleChartSvg = d3.select("#bubbleChartSvg");
+var bubbleChart = bubbleChartSvg.selectAll("circle")
+  .data(bubbleChartData)
+  .enter()
+  .append("circle")
+  .attr("cx", function(d) { return d.x; })
+  .attr("cy", function(d) { return d.y; })
+  .attr("r", function(d) { return d.r; })
+  .style("fill", "blue");
+</script>
+
+</body>
+</html>

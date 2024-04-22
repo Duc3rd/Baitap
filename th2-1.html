@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #333;
+      color: #fff;
+      float: left;
+    }
+
+    .sidebar-header {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar-header img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .sidebar-menu {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar-menu li {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .sidebar-menu li:hover {
+      background-color: #555;
+    }
+
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+
+    .content-header h1 {
+      margin-top: 0;
+    }
+
+    .statistics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .box {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .box:nth-child(odd) {
+      background-color: #008CBA;
+    }
+
+    .box:nth-child(even) {
+      background-color: #f44336;
+    }
+
+    .box span {
+      display: block;
+      font-size: 14px;
+    }
+
+    /* New Styles */
+    .teacher-content {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .sidebar-menu li.active {
+      background-color: #555;
+    }
+
+    .new-section {
+      margin-top: 20px;
+    }
+
+    .new-section input[type="text"],
+    .new-section select {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    .search-button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .refresh-button {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .teacher-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .teacher-table th,
+    .teacher-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .teacher-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="home_icon.png" alt="Home Icon">
+      <span>Trang chủ</span>
+    </div>
+    <ul class="sidebar-menu">
+      <li onclick="showTeacherContent()">Quản lý Giáo viên</li>
+      <li>Quản lý khoa</li>
+      <li>Quản lý chuyên ngành</li>
+      <li>Quản lý Hệ đào tạo</li>
+      <li>Quản lý Niên khóa</li>
+      <li>Quản lý Lớp</li>
+      <li>Quản lý Hội đồng</li>
+      <li>Quản lý sinh viên</li>
+      <li>Danh sách đồ án</li>
+      <li>Quản lý</li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <div class="content-header">
+      <h1>Quản lý Đồ Án Tốt Nghiệp</h1>
+    </div>
+    <div class="content-body">
+      <p>Đăng nhập thành công</p>
+      <div class="statistics">
+        <div class="box">27<span>Tổng số sinh viên</span></div>
+        <div class="box">28<span>Tổng số lớp</span></div>
+        <div class="box">4<span>Tổng số Khoa</span></div>
+        <div class="box">11<span>Tổng số chuyên ngành</span></div>
+        <div class="box">11<span>Tổng số đồ án</span></div>
+        <div class="box">10<span>Sinh viên đạt</span></div>
+        <div class="box">1<span>Sinh viên chưa đạt</span></div>
+        <div class="box">23<span>Tổng số giáo viên</span></div>
+      </div>
+      <!-- New Section -->
+      <div class="teacher-content">
+        <div class="new-section">
+          <span>Trang chủ > Giáo viên > +Thêm mới</span>
+          <input type="text" placeholder="Chọn Khoa">
+          <select>
+            <option>--Chọn Chuyên ngành--</option>
+            <option>Chuyên ngành 1</option>
+            <option>Chuyên ngành 2</option>
+            <option>Chuyên ngành 3</option>
+          </select>
+          <input type="text" placeholder="Tìm kiếm" class="search-button">
+          <button class="refresh-button">Làm mới</button>
+        </div>
+        <table class="teacher-table">
+          <thead>
+            <tr>
+              <th>Hình ảnh</th>
+              <th>Tên giáo viên và thông tin</th>
+              <th>Khoa, Chuyên ngành</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dữ liệu của giáo viên sẽ được thêm vào đây -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTeacherContent() {
+      var teacherContent = document.querySelector('.teacher-content');
+      teacherContent.style.display = 'block';
+
+      var sidebarMenuItems = document.querySelectorAll('.sidebar-menu li');
+      sidebarMenuItems.forEach(function(item) {
+        item.classList.remove('active');
+      });
+
+      var selectedMenuItem = document.querySelector('.sidebar-menu li:nth-child(1)');
+      selectedMenuItem.classList.add('active');
+    }
+  </script>
+</body>
+</html>
