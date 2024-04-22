@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #333;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+    }
+    .sidebar a.active {
+      font-weight: bold;
+    }
+    .sidebar a.active .icon {
+      color: #5cb85c;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .green-bg {
+      background-color: #5cb85c;
+    }
+    .red-bg {
+      background-color: #d9534f;
+    }
+    .teacher-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .teacher-info img {
+      width: 100px;
+      height: auto;
+      margin-right: 20px;
+    }
+    .teacher-details {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <a href="#" class="active">
+    <img src="home_icon.png" alt="Home Icon"> <strong>Trang chủ</strong>
+  </a>
+  <a href="#">Quản lý khoa</a>
+  <a href="#">Quản lý chuyên ngành</a>
+  <a href="#">Quản lý Hệ đào tạo</a>
+  <a href="#">Quản lý Niên khóa</a>
+  <a href="#">Quản lý Lớp</a>
+  <a href="#">Quản lý Giáo viên</a>
+  <a href="#">Quản lý Hội đồng</a>
+  <a href="#">Quản lý sinh viên</a>
+  <a href="#">Danh sách đồ án</a>
+  <a href="#">Quản lý</a>
+</div>
+
+<div class="content">
+  <h2>Trang chủ > Giáo viên > <span class="green-bg">+Thêm mới</span></h2>
+  <div>
+    <select id="khoa">
+      <option>Chọn Khoa</option>
+    </select>
+    <select id="chuyennganh">
+      <option>--Chọn Chuyên ngành--</option>
+    </select>
+    <input type="text" placeholder="Tìm kiếm" class="green-bg">
+    <button class="red-bg">Làm mới</button>
+  </div>
+  <p>*Quản lý giáo viên</p>
+  <div class="teacher-info">
+    <img src="nữ 1.jpg" alt="Teacher">
+    <div class="teacher-details">
+      <p><strong>Tên giáo viên:</strong> Bùi Thị Như</p>
+      <p><strong>Thông tin:</strong> Thêm thông tin</p>
+      <p><strong>Khoa:</strong> Công Nghệ Thông Tin</p>
+      <p><strong>Chuyên ngành:</strong> Hệ Thống Thông Tin</p>
+    </div>
+  </div>
+  <div class="teacher-info">
+    <img src="nam.jpg" alt="Teacher">
+    <div class="teacher-details">
+      <p><strong>Tên giáo viên:</strong> Nguyễn Hữu Tuân</p>
+      <p><strong>Thông tin:</strong> Thêm thông tin</p>
+      <p><strong>Khoa:</strong> Công Nghệ Thông Tin</p>
+      <p><strong>Chuyên ngành:</strong> Hệ Thống Thông Tin</p>
+    </div>
+  </div>
+  <div class="teacher-info">
+    <img src="nữ 2.jpg" alt="Teacher">
+    <div class="teacher-details">
+      <p><strong>Tên giáo viên:</strong> Nguyễn Thị Vân Anh</p>
+      <p><strong>Thông tin:</strong> Thêm thông tin</p>
+      <p><strong>Khoa:</strong> Công Nghệ Thông Tin</p>
+      <p><strong>Chuyên ngành:</strong> Hệ Thống Thông Tin</p>
+    </div>
+  </div>
+  <div class="teacher-info">
+    <img src="nữ 3.jpg" alt="Teacher">
+    <div class="teacher-details">
+      <p><strong>Tên giáo viên:</strong> Nguyễn Thị Hằng</p>
+      <p><strong>Thông tin:</strong> Thêm thông tin</p>
+      <p><strong>Khoa:</strong> Công Nghệ Thông Tin</p>
+      <p><strong>Chuyên ngành:</strong> Hệ Thống Thông Tin</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
